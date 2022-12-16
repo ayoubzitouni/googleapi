@@ -1,25 +1,19 @@
 import logo from './logo.svg';
 import './App.css';
+import { GoogleMap, useLoadScript } from '@react-google-maps/api';
 
 function App() {
+  const{isLoaded}=useLoadScript({googleMapsApiKey:process.env.Google_key})
+  if(!isLoaded){
+    return <div>Loading...</div>
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Map/>
     </div>
   );
 }
-
+function Map() {
+return <GoogleMap zoom={10} center={{lat:36,lng:10}} mapContainerClassName="maps"></GoogleMap>
+}
 export default App;
